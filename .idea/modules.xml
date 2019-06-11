@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/appteka.iml" filepath="$PROJECT_DIR$/appteka.iml" />
       <module fileurl="file://$PROJECT_DIR$/appteka-backend/appteka-backend.iml" filepath="$PROJECT_DIR$/appteka-backend/appteka-backend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/appteka-backend/backend.iml" filepath="$PROJECT_DIR$/appteka-backend/backend.iml" />
     </modules>
   </component>
 </project>

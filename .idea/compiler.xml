@@ -7,10 +7,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="appteka-backend" />
+        <module name="backend" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="appteka-backend" target="1.8" />
+      <module name="backend" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
