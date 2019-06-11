@@ -2,12 +2,12 @@ package com.appteka.backend.Controllers;
 
 import com.appteka.backend.Models.Item;
 import com.appteka.backend.Services.ItemService;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController(value = "/api/items")
+@RestController
+@RequestMapping(value = "/api/items")
 public class ItemController {
 
     public final ItemService itemService;

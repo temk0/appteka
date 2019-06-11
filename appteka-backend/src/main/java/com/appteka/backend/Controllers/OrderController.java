@@ -5,7 +5,8 @@ import com.appteka.backend.Models.dto.OrderDto;
 import com.appteka.backend.Services.OrderService;
 import org.springframework.web.bind.annotation.*;
 
-@RestController(value="/api/orders")
+@RestController
+@RequestMapping(value = "/api/orders")
 public class OrderController {
 
     private final OrderService orderService;
@@ -20,7 +21,7 @@ public class OrderController {
         return orderService.addOrder(orderDto);
     }
 
-    @DeleteMapping(value="/order-delete/{id}")
+    @DeleteMapping(value="/{id}")
     public void deleteOrder(@PathVariable int id){
         orderService.deleteOrder(id);
     }
