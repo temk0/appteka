@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ItemOrderRepository extends JpaRepository<ItemOrder, Integer> {
+
+    void deleteByOrder_Id(int id);
+
 }
