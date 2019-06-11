@@ -20,12 +20,9 @@ public class OrderController {
         return orderService.addOrder(orderDto);
     }
 
-    @DeleteMapping(value="/{id}")
+    @DeleteMapping(value="/order-delete/{id}")
     public void deleteOrder(@PathVariable int id){
         orderService.deleteOrder(id);
     }
-
-
-
 
 }
