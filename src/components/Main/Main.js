@@ -1,13 +1,20 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ItemCard from './ItemCard';
 import datatest from '../../datatest'
 
 //this is the main container for the website where the items are shown in cards comp...
 
 
-function Main() {
+function Main(props) {
 
-    const dataItems = datatest.map(item => <ItemCard key={item.id} item={item}/>);
+    console.log("Props are: ", props);
+    //const [items,setItems] = useState(props.Items);
+
+    const test = props.Items;
+    console.log("Menu Items are: ", test);
+
+
+    //const dataItems = test ? test.map(item => <ItemCard key={item.id} item={item}/>) || "Null";
 
     return(
 
@@ -35,7 +42,7 @@ function Main() {
                 <ul className="list-inline list-group-horizontal ">
                     <li className="">
 
-                        {dataItems}
+                        {props.Items && props.Items.map(item=> <ItemCard key={item.id} item={item}/> )}
                        {/*<ItemCard />*/}
                     </li>
                 </ul>
