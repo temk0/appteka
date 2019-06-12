@@ -1,20 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import ItemCard from './ItemCard';
-import datatest from '../../datatest'
 
 //this is the main container for the website where the items are shown in cards comp...
 
 
 function Main(props) {
-
-    console.log("Props are: ", props);
-    //const [items,setItems] = useState(props.Items);
-
-    const test = props.Items;
-    console.log("Menu Items are: ", test);
-
-
-    //const dataItems = test ? test.map(item => <ItemCard key={item.id} item={item}/>) || "Null";
 
     return(
 
@@ -41,9 +31,7 @@ function Main(props) {
             <div className="d-inline-block bg-light col-10 p-0">
                 <ul className="list-inline list-group-horizontal ">
                     <li className="">
-
-                        {props.Items && props.Items.map(item=> <ItemCard key={item.id} item={item}/> )}
-                       {/*<ItemCard />*/}
+                        {props.Items && props.Items.map(item=> <ItemCard key={item.id} item={item} itemsInCart={props.itemsInCart}/> )}
                     </li>
                 </ul>
 

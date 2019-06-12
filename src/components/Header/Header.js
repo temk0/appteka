@@ -1,12 +1,17 @@
 import React from "react"
+import {Link, navigate} from "@reach/router";
 
 // this header will contain search bar, cart and user section if its needed
 // for now it has hardcoded elements
-function Header() {
+function Header(props) {
+
+    const cartItems = props.cartItems;
+    console.log("Cart Items in header ", props.cartItems);
+
     return(
 
         <nav className="navbar navbar-expand-lg navbar-light bg-light col-12">
-            <a className="navbar-brand col-2" href="#">AppTeka</a>
+            <Link className="navbar-brand col-2" to="/">AppTeka</Link>
 
             <div className="collapse navbar-collapse col-10">
 
@@ -16,8 +21,9 @@ function Header() {
                 </form>
                 <ul className="navbar-nav mr-auto nav">
                     <li className="nav-item">
-                        <a href="#" className=" text-primary glyphicon glyphicon-search nav-link">Cart</a>
-                    </li>
+
+                        {cartItems.size === 0 ? <button onClick={()=> navigate("/cart") } className="btn btn-link text-primary glyphicon glyphicon-search nav-link">Cart</button> :  <button onClick={()=> navigate("/cart")} className="btn btn-link text-primary glyphicon glyphicon-search nav-link">Cart({cartItems.size})</button>}
+                            </li>
                     <li className="nav-item ">
                         <a className="nav-link text-primary" href="#">User</a>
                     </li>
