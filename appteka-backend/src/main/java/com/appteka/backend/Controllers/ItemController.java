@@ -18,8 +18,8 @@ public class ItemController {
 
 
     @GetMapping()
-    public List<Item> getAllItems(){
-        return itemService.getAll();
+    public List<Item> getAllItems(@RequestParam(required = false) String search){
+        return itemService.getAll(search);
     }
 
     @GetMapping(value = "/{id}")

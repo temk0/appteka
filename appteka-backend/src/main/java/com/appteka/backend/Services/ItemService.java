@@ -16,7 +16,10 @@ public class ItemService {
         this.itemRepository = itemRepository;
     }
 
-    public List<Item> getAll() {
+    public List<Item> getAll(String search) {
+        if(search != null && !search.isEmpty()) {
+            return itemRepository.findByNameContaining(search);
+        }
         return itemRepository.findAll();
     }
 

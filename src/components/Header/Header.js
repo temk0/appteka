@@ -1,12 +1,17 @@
-import React from "react"
+import React, {useState} from "react"
 import {Link, navigate} from "@reach/router";
 
 // this header will contain search bar, cart and user section if its needed
 // for now it has hardcoded elements
 function Header(props) {
 
+    const [searchQuery, setSearchQuery] = useState('');
     const cartItems = props.cartItems;
     console.log("Cart Items in header ", props.cartItems);
+
+    const handleChange = event => {
+        setSearchQuery(event.target.value);
+    };
 
     return(
 
@@ -15,10 +20,10 @@ function Header(props) {
 
             <div className="collapse navbar-collapse col-10">
 
-                <form className="form-inline my-2 my-lg-0 col-8">
-                    <input className="form-control mr-1 col-8" type="search" placeholder="Search"/>
-                    <button className="btn btn-info my-2 my-sm-0">Search</button>
-                </form>
+                <div className="form-inline my-2 my-lg-0 col-8">
+                    <input onChange={handleChange} className="form-control mr-1 col-8" type="text" placeholder="Search"/>
+                    <button className="btn btn-info my-2 my-sm-0" onClick={() => props.search(searchQuery)}>Search</button>
+                </div>
                 <ul className="navbar-nav mr-auto nav">
                     <li className="nav-item">
 

@@ -7,6 +7,13 @@ async function getAllItems(){
         })
 }
 
+async function searchItems(search){
+    return axios.get("/api/items", {params: {search: search}})
+        .then(response =>{
+            return response.data;
+        })
+}
+
 async function getOneItem(id) {
     return axios.get(`/api/items/${id}`)
         .then(response =>{
@@ -19,7 +26,10 @@ async function deleteItem(id) {
         .then(response =>{
             return response.data;
         })
-
 }
 
-export {getAllItems, getOneItem, deleteItem}
+async function addItem(item) {
+    return axios.post("/api/items/addItem", item)
+}
+
+export {getAllItems, searchItems, addItem, getOneItem, deleteItem}

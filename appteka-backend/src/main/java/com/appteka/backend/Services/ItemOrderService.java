@@ -41,11 +41,17 @@ public class ItemOrderService {
         itemOrder.setOrder(order);
         itemOrder.setItem(itemService.getOne(itemOrderDto.getItemId()));
 
+        itemOrder.getItem().setStock(itemOrder.getItem().getStock() - itemOrderDto.getQuantity());
+
         return itemOrderRepository.save(itemOrder);
     }
 
     public void deleteByOrderId(int id){
         itemOrderRepository.deleteByOrder_Id(id);
+    }
+
+    public List<ItemOrder> findByOrderId(int id){
+        return itemOrderRepository.findByOrder_Id(id);
     }
 
 }

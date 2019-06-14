@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Footer from'../Footer/Footer';
-import {getAllItems} from "../../Services/ItemService";
+import {getAllItems, searchItems} from "../../Services/ItemService";
 import {LocationProvider, Router} from "@reach/router";
 import CartPage from "../../pages/CartPage";
+import SideBar from "../SideBar";
+import AddItem from "../../pages/AddItem";
 
 function App() {
 
@@ -18,20 +20,37 @@ function App() {
         setCartItems(nova);
     };
 
+    const deleteFromCart = id => {
+        const nova = new Set(cartItems);
+
+        nova.forEach(item => {
+            if (id === item.id){
+                nova.delete(item);
+            }
+        });
+        setCartItems(nova);
+    };
+
+    const search = search => {
+        searchItems(search).then(res => setItems(res));
+    };
+
     useEffect(()=>{
         getAllItems().then(res=> setItems(res));
     }, []);
 
   return (
       <div className="container-fluid bg-light">
-        <Header cartItems={cartItems} />
+          <Header search={search} cartItems={cartItems} />
+          <SideBar/>
           <LocationProvider>
               <Router>
                   <Main Items={items} itemsInCart={addToCart} path="/" />
-                  <CartPage cartItems={cartItems} path="/cart"/>
+                  <CartPage cartItems={cartItems} deleteFromCart={deleteFromCart} path="/cart"/>
+                  <AddItem path="/add-item"/>
               </Router>
           </LocationProvider>
-        <Footer />
+          <Footer />
       </div>
   );
 }

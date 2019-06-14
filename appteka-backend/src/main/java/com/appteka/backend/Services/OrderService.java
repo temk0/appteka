@@ -42,10 +42,10 @@ public class OrderService {
 
         for (ItemOrderDto itemOrderDto : orderDto.getItems()){
          itemOrderService.addItemOrder(itemOrderDto,order);
+
         }
 
         return order;
-
     }
 
 
