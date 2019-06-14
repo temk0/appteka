@@ -18,11 +18,9 @@ function App() {
         setCartItems(nova);
     };
 
-
     useEffect(()=>{
         getAllItems().then(res=> setItems(res));
     }, []);
-
 
   return (
       <div className="container-fluid bg-light">
