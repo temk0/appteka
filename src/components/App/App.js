@@ -7,6 +7,7 @@ import {LocationProvider, Router} from "@reach/router";
 import CartPage from "../../pages/CartPage";
 import SideBar from "../Main/SideBar";
 import AddItem from "../../pages/AddItem";
+import TicketPage from"../../pages/TicketPage";
 
 function App() {
 
@@ -48,6 +49,7 @@ function App() {
                   <Main Items={items} itemsInCart={addToCart} path="/" />
                   <CartPage cartItems={cartItems} deleteFromCart={deleteFromCart} path="/cart"/>
                   <AddItem path="/add-item"/>
+                  <TicketPage path="/ticket-page"/>
               </Router>
           </LocationProvider>
           <Footer />
