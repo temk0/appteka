@@ -5,7 +5,7 @@ import Footer from'../Footer/Footer';
 import {getAllItems, searchItems} from "../../Services/ItemService";
 import {LocationProvider, Router} from "@reach/router";
 import CartPage from "../../pages/CartPage";
-import SideBar from "../SideBar";
+import SideBar from "../Main/SideBar";
 import AddItem from "../../pages/AddItem";
 
 function App() {
@@ -40,7 +40,7 @@ function App() {
     }, []);
 
   return (
-      <div className="container-fluid bg-light">
+      <div className="container-fluid bg-light p-lg-0 align-content-center">
           <Header search={search} cartItems={cartItems} />
           <SideBar/>
           <LocationProvider>

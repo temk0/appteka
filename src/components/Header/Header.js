@@ -11,6 +11,12 @@ function Header(props) {
 
     const handleChange = event => {
         setSearchQuery(event.target.value);
+
+    };
+
+    const handleSearch =()=>{
+        props.search(searchQuery);
+        navigate("/");
     };
 
     return(
@@ -22,23 +28,11 @@ function Header(props) {
 
                 <div className="form-inline my-2 my-lg-0 col-8">
                     <input onChange={handleChange} className="form-control mr-1 col-8" type="text" placeholder="Search"/>
-                    <button className="btn btn-info my-2 my-sm-0" onClick={() => props.search(searchQuery)}>Search</button>
+                    <button className="btn btn-info my-2 my-sm-0" onClick={handleSearch}>Search</button>
                 </div>
-                <ul className="navbar-nav mr-auto nav">
-                    <li className="nav-item">
 
-                        {cartItems.size === 0 ? <button onClick={()=> navigate("/cart") } className="btn btn-link text-primary glyphicon glyphicon-search nav-link">Cart</button> :  <button onClick={()=> navigate("/cart")} className="btn btn-link text-primary glyphicon glyphicon-search nav-link">Cart({cartItems.size})</button>}
-                            </li>
-                    <li className="nav-item ">
-                        <a className="nav-link text-primary" href="#">User</a>
-                    </li>
+                        {cartItems.size === 0 ? <button onClick={()=> navigate("/cart") } className="btn btn-outline-success col-lg-1">Cart</button> :  <button onClick={()=> navigate("/cart")} className="btn btn-success col-lg-1">Cart ({cartItems.size})</button>}
 
-                    <li className="nav-item">
-                        <a className="nav-link text-primary" href="#">Sign In</a>
-                    </li>
-
-
-                </ul>
             </div>
 
 

@@ -32,75 +32,77 @@ function AddItem(props) {
     };
 
     return (
-        <div>
-            <h1 className="title">Add Item</h1>
-            <form onSubmit={handleSubmit}>
-                <div className="row">
-                    <div className="col-lg-12">
-                        <div className="form-group">
-                            <label>Name</label>
-                            <input onChange={handleChange('name', 'value')} type="text" className="form-control"
-                                   placeholder="Enter name"/>
-                            <small className="form-text text-muted">Add unique name for the drug.
-                            </small>
+        <div className="container d-inline-block col-lg-8 m-lg-4" >
+            <div className="ml-lg-5">
+                <h1 className="title">Add Item</h1>
+                <form className="align-content-center" onSubmit={handleSubmit}>
+                    <div className="row">
+                        <div className="col-lg-6">
+                            <div className="form-group">
+                                <label>Name</label>
+                                <input onChange={handleChange('name', 'value')} type="text" className="form-control"
+                                       placeholder="Enter name"/>
+                                <small className="form-text text-muted">Add unique name for the drug.
+                                </small>
+                            </div>
                         </div>
-                    </div>
-                    <div className="col-lg-12">
-                        <div className="form-group">
-                            <label>Description</label>
-                            <input onChange={handleChange('description', 'value')} type="text" className="form-control"
-                                   placeholder="Description"/>
-                            <small className="form-text text-muted">Say something for the item.
-                            </small>
+                        <div className="col-lg-6">
+                            <div className="form-group">
+                                <label>Description</label>
+                                <input onChange={handleChange('description', 'value')} type="text" className="form-control"
+                                       placeholder="Description"/>
+                                <small className="form-text text-muted">Say something for the item.
+                                </small>
+                            </div>
                         </div>
-                    </div>
-                    <div className="col-lg-12">
-                        <div className="form-group">
-                            <label>Url</label>
-                            <input onChange={handleChange('imageUrl', 'value')} type="text" className="form-control"
-                                   placeholder="Image Url"/>
-                            <input type="file"/>
+                        <div className="col-lg-6">
+                            <div className="form-group">
+                                <label>Url</label>
+                                <input onChange={handleChange('imageUrl', 'value')} type="text" className="form-control"
+                                       placeholder="Image Url"/>
+                                <input type="file"/>
+                            </div>
                         </div>
-                    </div>
-                    <div className="col-lg-12">
-                        <div className="form-group">
-                            <label>Stock</label>
-                            <input onChange={handleChange('stock', 'value')} type="number" className="form-control"
-                                   placeholder="On Stock"/>
-                            <small className="form-text text-muted">Add how many items are on stock.
-                            </small>
+                        <div className="col-lg-6">
+                            <div className="form-group">
+                                <label>Stock</label>
+                                <input onChange={handleChange('stock', 'value')} type="number" className="form-control"
+                                       placeholder="On Stock"/>
+                                <small className="form-text text-muted">Add how many items are on stock.
+                                </small>
+                            </div>
                         </div>
-                    </div>
-                    <div className="col-lg-12">
-                        <div className="form-group">
-                            <label>Price</label>
-                            <input onChange={handleChange('price', 'value')} type="number" className="form-control"
-                                   placeholder="Regular Price"/>
-                            <small className="form-text text-muted">Add Price for the article.
-                            </small>
-                        </div>
-                    </div>
-
-                    <div className="col-lg-12">
-                        <div className="form-group">
-                            <label>Recipe Price</label>
-                            <input onChange={handleChange('recipePrice', 'value')} type="number" className="form-control"
-                                   placeholder="Recipe Price"/>
-                            <small className="form-text text-muted">Add Recipe Price for the article.
-                            </small>
-                        </div>
-                        <div className="form-check">
-                            <input onChange={handleChange('recipe', 'checked')} type="checkbox"
-                                   className="form-check-input"/>
-                            <label className="form-check-label">On Recipe</label>
+                        <div className="col-lg-6">
+                            <div className="form-group">
+                                <label>Price</label>
+                                <input onChange={handleChange('price', 'value')} type="number" className="form-control"
+                                       placeholder="Regular Price"/>
+                                <small className="form-text text-muted">Add Price for the article.
+                                </small>
+                            </div>
                         </div>
 
+                        <div className="col-lg-6">
+                            <div className="form-group">
+                                <label>Recipe Price</label>
+                                <input onChange={handleChange('recipePrice', 'value')} type="number" className="form-control"
+                                       placeholder="Recipe Price"/>
+                                <small className="form-text text-muted">Add Recipe Price for the article.
+                                </small>
+                            </div>
+                            <div className="form-check">
+                                <input onChange={handleChange('recipe', 'checked')} type="checkbox"
+                                       className="form-check-input"/>
+                                <label className="form-check-label">On Recipe</label>
+                            </div>
+
+                        </div>
+                        <div className="col-lg-6 text-center">
+                            <button type="submit" className="btn btn-primary">Submit</button>
+                        </div>
                     </div>
-                    <div className="col-lg-12 text-center">
-                        <button type="submit" className="btn btn-primary">Submit</button>
-                    </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     )
 }
