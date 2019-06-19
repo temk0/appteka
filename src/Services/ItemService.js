@@ -22,7 +22,7 @@ async function getOneItem(id) {
 }
 
 async function deleteItem(id) {
-    return axios.delete(`/api/items/${id}`)
+    return await axios.delete(`/api/items/${id}`)
         .then(response =>{
             return response.data;
         })

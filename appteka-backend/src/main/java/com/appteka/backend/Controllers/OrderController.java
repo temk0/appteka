@@ -21,6 +21,10 @@ public class OrderController {
         this.itemOrderService = itemOrderService;
     }
 
+    @GetMapping
+    public List<Order> getAllOrders(){
+        return orderService.getAll();
+    }
 
     @GetMapping(value = "/{id}")
     public List<ItemOrder> getOrder(@PathVariable int id){

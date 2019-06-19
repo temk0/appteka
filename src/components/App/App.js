@@ -1,17 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
-import Footer from'../Footer/Footer';
+import Footer from '../Footer/Footer';
 import {getAllItems, searchItems} from "../../Services/ItemService";
 import {LocationProvider, Router} from "@reach/router";
 import CartPage from "../../pages/CartPage";
 import SideBar from "../Main/SideBar";
 import AddItem from "../../pages/AddItem";
-import TicketPage from"../../pages/TicketPage";
+import TicketPage from "../../pages/TicketPage";
+import {ToastProvider} from 'react-toast-notifications';
 
 function App() {
 
-    const [items,setItems] = useState(null);
+    const [items, setItems] = useState(null);
 
     const [cartItems, setCartItems] = useState(new Set());
 
@@ -25,7 +26,7 @@ function App() {
         const nova = new Set(cartItems);
 
         nova.forEach(item => {
-            if (id === item.id){
+            if (id === item.id) {
                 nova.delete(item);
             }
         });
@@ -36,25 +37,36 @@ function App() {
         searchItems(search).then(res => setItems(res));
     };
 
-    useEffect(()=>{
-        getAllItems().then(res=> setItems(res));
+    useEffect(() => {
+        getAllItems().then(res => setItems(res));
     }, []);
 
-  return (
-      <div className="container-fluid bg-light p-lg-0 align-content-center">
-          <Header search={search} cartItems={cartItems} />
-          <SideBar/>
-          <LocationProvider>
-              <Router>
-                  <Main Items={items} itemsInCart={addToCart} path="/" />
-                  <CartPage cartItems={cartItems} deleteFromCart={deleteFromCart} path="/cart"/>
-                  <AddItem path="/add-item"/>
-                  <TicketPage path="/ticket-page"/>
-              </Router>
-          </LocationProvider>
-          <Footer />
-      </div>
-  );
+    return (
+        <div className="container-fluid bg-light">
+            <Header search={search} cartItems={cartItems}/>
+            <div className="row">
+                <div className="col-lg-2">
+                    <SideBar/>
+                </div>
+                <div className="col-lg-10">
+                    <div className="container">
+                        <LocationProvider>
+                            <ToastProvider>
+                                <Router>
+                                    <Main Items={items} itemsInCart={addToCart} path="/"/>
+                                    <CartPage cartItems={cartItems} deleteFromCart={deleteFromCart} path="/cart"/>
+                                    <AddItem path="/add-item"/>
+                                    <TicketPage path="/ticket-page"/>
+                                    <TicketPage path="/ticket-page/:orderId"/>
+                                </Router>
+                            </ToastProvider>
+                        </LocationProvider>
+                    </div>
+                </div>
+            </div>
+            <Footer/>
+        </div>
+    );
 }
 
 export default App;

@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {deleteItem} from "../../Services/ItemService";
 
 function ItemCard(props) {
 
@@ -23,15 +24,19 @@ function ItemCard(props) {
     const limit = showMore ? props.item.description.length : 50;
     const handleReadMore = () => setShowMore(!showMore);
 
+    const  handleDelete = id => {
+        deleteItem(id).then(window.location.reload());
+    };
+
     return (
 
 
-        <div className="card d-inline-block col-lg-3 float-left m-1 p-0">
+        <div className="card">
             {!<img src={props.item.imageUrl}
-                 className="card-img-top mt-3" alt="Item Image "/> ? null :
+                 className="card-img-top mt-3" alt="text "/> ? null :
             <img className="card-img-top w-60 h-40" src="http://placehold.it/120x80" alt="prewiew"/>}
 
-            <div className="card-body m-0">
+            <div className="card-body">
 
                 <h5 className="card-title">{props.item.name}</h5>
                 {
@@ -48,13 +53,15 @@ function ItemCard(props) {
 
                 <p className="text-right m-0 font-weight-light">On recpie: {props.item.recipePrice}</p>
                 <p className="text-right m-0 mb-1 font-weight-bold">Private: {props.item.price}</p>
-                <button className="btn btn-primary " disabled={disableBtn} onClick={()=> addToCart(props.item)}>Add to cart</button>
-
-                <small className="pl-lg-4">
+                <p className="text-right">
                     On Stock:
                     {!props.item.stock ? 0 : <span className="text-success pl-lg-4">yes</span>}
 
-                </small>
+                </p>
+                <div className="row">
+                <div className="col-lg-6 offset-1"><button className="btn btn-primary " disabled={disableBtn} onClick={()=> addToCart(props.item)}>Add to cart</button></div>
+                <div className="col-lg-4 text-right"><button className="btn btn-danger" onClick={()=> handleDelete(props.item.id)}>Delete</button></div>
+                </div>
             </div>
 
         </div>

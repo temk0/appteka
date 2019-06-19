@@ -1,19 +1,20 @@
 import React, {useState, useEffect} from 'react';
 import './cartPage.css';
 import {createOrder} from "../Services/OrderService";
+import {withToastManager} from "react-toast-notifications";
+import {navigate} from "@reach/router";
 
 function CartPage(props) {
 
 
     const [items, setItems] = useState([]);
-
+    const {toastManager} = props;
 
     useEffect(() => {
         const nova = [...props.cartItems].map(item => ({...item, quantity: 1, onRecipe: false}));
         setItems(nova)
     }, []);
 
-    console.log("items are: ", items);
     const removeFromList = id => {
         props.deleteFromCart(id);
         let newList = [...items];
@@ -30,6 +31,11 @@ function CartPage(props) {
             })
         };
         createOrder(Request)
+            .then( res=> {
+                toastManager.add(`Order successfully created`, {appearance: 'success', autoDismiss: true})
+                navigate("/");
+            })
+            .catch( err => toastManager.add("Something went wrong, try again later", {appearance: 'error', autoDismiss: true}))
     };
 
     const handleChange = (id, name, target) => event => {
@@ -45,12 +51,10 @@ function CartPage(props) {
     const TotalCost = () => {
 
 
-
     };
 
 
     return (
-        <div className="container d-inline-block mb-lg-4 mt-lg-4 col-lg-10">
             <div className="card">
                 <div className="card-header bg-info text-light">
                     {/*<i className="fa fa-shopping-cart" aria-hidden="true"></i>*/}
@@ -59,7 +63,7 @@ function CartPage(props) {
                 <div className="card-body">
 
                     {items.length > 0 ? items.map((item, key) =>
-                       <div className="">
+                        <div className="">
                             <div className="row" key={key}>
                                 <div className="col-12 col-sm-12 col-md-2 text-center">
                                     <img className="img-responsive" src="http://placehold.it/120x80" alt="prewiew"
@@ -77,8 +81,9 @@ function CartPage(props) {
                                             className="text-muted">{item.onRecipe ? "Recipe Price" : "Regular Price"}</span></strong>
                                         </h6>
                                         {item.recipe && <div><label>On Recipe </label><input type="checkbox"
-                                                                                              onChange={handleChange(item.id, 'onRecipe', "checked")}
-                                                                                              value={item.onRecipe}/></div>}
+                                                                                             onChange={handleChange(item.id, 'onRecipe', "checked")}
+                                                                                             value={item.onRecipe}/>
+                                        </div>}
                                     </div>
                                     <div className="col-4 col-sm-4 col-md-4">
                                         <input type="number" onChange={handleChange(item.id, 'quantity', "value")}
@@ -94,13 +99,12 @@ function CartPage(props) {
                                     </div>
 
 
-
                                     <hr/>
                                 </div>
 
                             </div>
-                           <hr/>
-                       </div>
+                            <hr/>
+                        </div>
                     ) : <div>There are no articles </div>}
 
 
@@ -116,8 +120,7 @@ function CartPage(props) {
                     </div>
                 </div>
             </div>
-        </div>
     )
 }
 
-export default CartPage;
+export default withToastManager(CartPage);

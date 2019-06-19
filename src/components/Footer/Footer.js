@@ -4,7 +4,7 @@ import React from 'react';
 
 function Footer() {
     return(
-        <div className="modal-footer" >
+        <div className="modal-footer mt-4" >
 
         </div>
     );

@@ -7,7 +7,6 @@ function Header(props) {
 
     const [searchQuery, setSearchQuery] = useState('');
     const cartItems = props.cartItems;
-    console.log("Cart Items in header ", props.cartItems);
 
     const handleChange = event => {
         setSearchQuery(event.target.value);

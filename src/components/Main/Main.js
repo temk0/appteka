@@ -6,13 +6,15 @@ import ItemCard from './ItemCard';
 
 function Main(props) {
 
-    return(
+    return (
 
-        <div className="container d-inline-block m-0 p-0 col-lg-10">
+        <div className="row mt-2">
 
-                {props.Items && props.Items.length === 0 && <span>No items matching the search query.</span>}
-
-                        {props.Items && props.Items.map(item=> <ItemCard key={item.id} item={item} itemsInCart={props.itemsInCart}/> )}
+            {props.Items && props.Items.length === 0 && <span>No items matching the search query.</span>}
+            {props.Items && props.Items.map(item =>
+                <div className="col-lg-4 mt-3">
+                    <ItemCard key={item.id} item={item} itemsInCart={props.itemsInCart}/>
+                </div>)}
 
         </div>
 
