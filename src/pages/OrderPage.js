@@ -1,27 +1,41 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {deleteOrder, getAllOrders, getOrder} from "../Services/OrderService";
 import {Link, navigate} from "@reach/router";
 import {withToastManager} from "react-toast-notifications";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faEuroSign} from "@fortawesome/free-solid-svg-icons/faEuroSign";
 
 
-function TicketPage(props) {
+function OrderPage(props) {
 
     const {toastManager} = props;
     const [orders, setOrders] = useState(null);
     const [searchedOrder, setSearchedOrder] = useState(null);
     const [orderId, setOrderId] = useState(null);
     const [invalid, setInvalid] = useState(false);
+    const [totalPrice, setTotalPrice] = useState(0);
 
     useEffect(() => {
 
+        let total = 0;
         if (props.orderId !== undefined) {
             setOrderId(props.orderId);
             getOrder(props.orderId).then(res => {
                 if (res.data.length === 0)
                     setInvalid(true);
-                else
-                    setSearchedOrder(res.data);
+                else {
+                    let data = res.data;
+                    setSearchedOrder(data);
 
+                    data.forEach(item => {
+                        if (item.onRecipe) {
+                            total += item.item.recipePrice * item.quantity;
+                        } else {
+                            total += item.item.price * item.quantity;
+                        }
+                    });
+                    setTotalPrice(total);
+                }
             })
         } else
             getAllOrders().then(res => setOrders(res.data));
@@ -34,12 +48,12 @@ function TicketPage(props) {
     };
 
     const orderDelete = id => {
-        deleteOrder(id).then( res=> {
+        deleteOrder(id).then(res => {
             navigate("/ticket-page");
             setInterval(function () {
                 window.location.reload();
-            },2000);
-            toastManager.add(`Order ${id} successfully deleted`, {appearance:"error", autoDismiss:true});
+            }, 2000);
+            toastManager.add(`Order ${id} successfully deleted`, {appearance: "error", autoDismiss: true});
         });
     };
 
@@ -59,9 +73,9 @@ function TicketPage(props) {
             </div>)}
 
 
-            {searchedOrder && searchedOrder.map(object => <div className="card mt-4">
+            {searchedOrder && searchedOrder.map((object,key) => <div key={key} className="card mt-4">
                 <div className="card-body">
-                    <h5 className="card-title">{object.item.name}</h5>
+                    <h2 className="card-title text-center">{object.item.name}</h2>
                     <p className="card-text">{object.item.description}</p>
                     <p>On Recipe: {object.onRecipe ? <b>Yes</b> : <b>No</b>}</p>
                 </div>
@@ -73,11 +87,16 @@ function TicketPage(props) {
                     <li className="list-group-item">On Stock Left: {object.item.stock}</li>
                 </ul>
             </div>)}
-            {searchedOrder && <div className="text-center">
-                <button className="btn btn-danger mt-3" onClick={() => orderDelete(orderId)}> Delete Order</button>
+            {searchedOrder && <div className="row">
+                <div className="col-lg-6 mt-3">
+                    <h4>Total Price: {totalPrice} <FontAwesomeIcon icon={faEuroSign}/> </h4>
+                </div>
+                <div className="col-lg-6 text-right">
+                    <button className="btn btn-danger mt-3" onClick={() => orderDelete(orderId)}> Delete Order</button>
+                </div>
             </div>}
 
-            {invalid &&  <div className="text-center">
+            {invalid && <div className="text-center">
                 <p>Please search for another order, or check the available orders in the tickets page</p>
                 <Link to="/">Back to Home</Link>
             </div>}
@@ -87,4 +106,4 @@ function TicketPage(props) {
 
 }
 
-export default withToastManager(TicketPage)
+export default withToastManager(OrderPage)

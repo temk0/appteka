@@ -27,16 +27,12 @@ function SideBar() {
                     {/*bi bilo interesno ako moze od tuka direkno da se pishe kodot ?*/}
 
 
-                    <a href="/ticket-page" className="nav-link border-top text-uppercase text-primary">Enter Order
-                        Code</a>
+                    <a href="/ticket-page" className="nav-link border-top text-uppercase text-primary">Orders</a>
                     <input
                         onKeyPress={event => event.key === "Enter" && getOrder(event.target.value)
                             .then(navigate(`/ticket-page/${event.target.value}`, {orderId: event.target.value}), window.location.reload())}
-                        type="text" className="form-control text-info p-lg-1"/>
+                        type="text" className="form-control text-info p-lg-1" placeholder="Order code" style={{borderRadius:"12px"}}/>
                 </li>
-                {/*<li className="list-inline-item">*/}
-                {/*    <a href="#" className="nav-link border-top border-bottom text-uppercase text-primary">All Items</a>*/}
-                {/*</li>*/}
             </ul>
         </div>
     )

@@ -55,25 +55,26 @@ function AddItem(props) {
                     </div>
                     <div className="col-lg-6">
                         <div className="form-group">
+                            <label>Url</label>
+                            <input onChange={handleChange('imageUrl', 'value')} type="text" className="form-control"
+                                   placeholder="Image Url"/>
+                            <input type="file"/>
+                        </div>
+
+                    </div>
+                    <div className="col-lg-6">
+                        <div className="form-group">
                             <label>Description</label>
-                            <input onChange={handleChange('description', 'value')} type="text" className="form-control"
-                                   placeholder="Description"/>
+                            <textarea rows={4} onChange={handleChange('description', 'value')} type="text" className="form-control"
+                                      placeholder="Some text here..."/>
                             <small className="form-text text-muted">Say something for the item.
                             </small>
                         </div>
                     </div>
                     <div className="col-lg-6">
                         <div className="form-group">
-                            <label>Url</label>
-                            <input onChange={handleChange('imageUrl', 'value')} type="text" className="form-control"
-                                   placeholder="Image Url"/>
-                            <input type="file"/>
-                        </div>
-                    </div>
-                    <div className="col-lg-6">
-                        <div className="form-group">
                             <label>Stock</label>
-                            <input onChange={handleChange('stock', 'value')} type="number" className="form-control"
+                            <input onChange={handleChange('stock', 'value')} value={item.stock} type="number" className="form-control"
                                    placeholder="On Stock"/>
                             <small className="form-text text-muted">Add how many items are on stock.
                             </small>
@@ -99,9 +100,10 @@ function AddItem(props) {
                             </small>
                         </div>
                         <div className="form-check">
-                            <input onChange={handleChange('recipe', 'checked')} type="checkbox"
+                            <label className="form-check-label">
+                                <input onChange={handleChange('recipe', 'checked')} type="checkbox"
                                    className="form-check-input"/>
-                            <label className="form-check-label">On Recipe</label>
+                            On Recipe</label>
                         </div>
 
                     </div>

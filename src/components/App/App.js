@@ -7,7 +7,7 @@ import {LocationProvider, Router} from "@reach/router";
 import CartPage from "../../pages/CartPage";
 import SideBar from "../Main/SideBar";
 import AddItem from "../../pages/AddItem";
-import TicketPage from "../../pages/TicketPage";
+import TicketPage from "../../pages/OrderPage";
 import {ToastProvider} from 'react-toast-notifications';
 
 function App() {

@@ -19,6 +19,8 @@ public class Item {
     Integer id;
 
     private String name;
+
+    @Column(length = 1024)
     private String description;
     private String imageUrl;
     private Double price;

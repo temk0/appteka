@@ -32,4 +32,8 @@ async function addItem(item) {
     return axios.post("/api/items/addItem", item)
 }
 
-export {getAllItems, searchItems, addItem, getOneItem, deleteItem}
+async function editItem(item) {
+    return axios.put(`/api/items/${item.id}`, item).then(res=> console.log(res))
+}
+
+export {getAllItems, searchItems, addItem, getOneItem, deleteItem, editItem}

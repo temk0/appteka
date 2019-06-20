@@ -1,16 +1,26 @@
 import React, {useState} from 'react';
-import {deleteItem} from "../../Services/ItemService";
+import {faShoppingCart} from "@fortawesome/free-solid-svg-icons/faShoppingCart";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import ItemModal from "./ItemModal";
+import image1 from "../../assets/GettyImages-508498022-600x414.jpg";
+
 
 function ItemCard(props) {
-
 
     const [showMore, setShowMore] = useState(false);
 
     const [disableBtn, setDisableBtn] = useState(false);
 
+    const [openModal, setOpenModal] = useState(false);
+
+
+    const closeModal = () => {
+        setOpenModal(false);
+    };
+
     const handleDisableBtn = () => setDisableBtn(!disableBtn);
 
-    const addToCart=(id) => {
+    const addToCart = (id) => {
         handleDisableBtn();
         props.itemsInCart(id);
 
@@ -24,17 +34,13 @@ function ItemCard(props) {
     const limit = showMore ? props.item.description.length : 50;
     const handleReadMore = () => setShowMore(!showMore);
 
-    const  handleDelete = id => {
-        deleteItem(id).then(window.location.reload());
-    };
-
     return (
 
 
         <div className="card">
             {!<img src={props.item.imageUrl}
-                 className="card-img-top mt-3" alt="text "/> ? null :
-            <img className="card-img-top w-60 h-40" src="http://placehold.it/120x80" alt="prewiew"/>}
+                   className="card-img-top mt-3" alt="text "/> ? null :
+                <img className="card-img-top w-60 h-40" src={image1} alt="drug"/>}
 
             <div className="card-body">
 
@@ -50,17 +56,27 @@ function ItemCard(props) {
                             </div>)
                 }
 
-
-                <p className="text-right m-0 font-weight-light">On recpie: {props.item.recipePrice}</p>
-                <p className="text-right m-0 mb-1 font-weight-bold">Private: {props.item.price}</p>
+                <p className="text-right m-0">{props.item.recipe ? <b>On recipe: {props.item.recipePrice}</b> : <span>On recpie: {props.item.recipePrice}</span>  }</p>
+                <p className="text-right m-0 mb-1">{!props.item.recipe ? <b>Private: {props.item.price}</b> : <span>Private: {props.item.price}</span>  }</p>
                 <p className="text-right">
                     On Stock:
-                    {!props.item.stock ? 0 : <span className="text-success pl-lg-4">yes</span>}
-
+                    {!props.item.stock ? <b className="text-danger"> Empty </b> : <span className="text-success pl-lg-4">{props.item.stock}</span>}
                 </p>
                 <div className="row">
-                <div className="col-lg-6 offset-1"><button className="btn btn-primary " disabled={disableBtn} onClick={()=> addToCart(props.item)}>Add to cart</button></div>
-                <div className="col-lg-4 text-right"><button className="btn btn-danger" onClick={()=> handleDelete(props.item.id)}>Delete</button></div>
+                    <div className="col-lg-6 offset-1">
+                        {!props.item.stock ? <button className="btn btn-success " disabled={true}
+                                                      onClick={() => addToCart(props.item)}>Add to: <FontAwesomeIcon icon={faShoppingCart}/>
+                        </button> : <button className="btn btn-success " disabled={disableBtn}
+                                            onClick={() => addToCart(props.item)}>Add to: <FontAwesomeIcon icon={faShoppingCart}/>
+                        </button> }
+                    </div>
+                    <div className="col-lg-4 text-right">
+                        <ItemModal show={openModal} onHide={closeModal}  Item={props.item}/>
+                    </div>
+
+
+
+
                 </div>
             </div>
 
