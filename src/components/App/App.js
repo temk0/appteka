@@ -9,6 +9,7 @@ import SideBar from "../Main/SideBar";
 import AddItem from "../../pages/AddItem";
 import TicketPage from "../../pages/OrderPage";
 import {ToastProvider} from 'react-toast-notifications';
+import Register from "../../pages/Register";
 
 function App() {
 
@@ -56,6 +57,7 @@ function App() {
                                     <Main Items={items} itemsInCart={addToCart} path="/"/>
                                     <CartPage cartItems={cartItems} deleteFromCart={deleteFromCart} path="/cart"/>
                                     <AddItem path="/add-item"/>
+                                    <Register path="/register"/>
                                     <TicketPage path="/ticket-page"/>
                                     <TicketPage path="/ticket-page/:orderId"/>
                                 </Router>

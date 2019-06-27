@@ -45,12 +45,13 @@ function CartPage(props) {
         };
         createOrder(Request)
             .then(res => {
-                toastManager.add(`Order successfully created`, {appearance: 'success', autoDismiss: true});
+                console.log(res.data);
                 navigate("/");
 
                 setInterval(function () {
                     window.location.reload();
                 },2000);
+                toastManager.add(`Your order number is: ${res.data.id}`, {appearance: 'success', autoDismiss: false});
             })
             .catch(err => toastManager.add("Something went wrong, try again later", {
                 appearance: 'error',
@@ -87,8 +88,9 @@ function CartPage(props) {
     return (
         <div className="card">
             <div className="card-header bg-info text-light">
-                {/*<i className="fa fa-shopping-cart" aria-hidden="true"></i>*/}
+
                 <b>Your Cart</b>
+
             </div>
             <div className="card-body">
 
@@ -102,14 +104,18 @@ function CartPage(props) {
                             <div className="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
                                 <h4 className="product-name"><strong>{item.name}</strong></h4>
                                 <h4>
+
                                     <small>{item.description}</small>
+
                                 </h4>
                             </div>
                             <div className="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row">
                                 <div className="col-3 col-sm-3 col-md-6 text-md-right">
-                                    <h6><strong>{item.onRecipe ? item.recipePrice : item.price} <span
+                                    <h6>
+                                        <strong>{item.onRecipe ? item.recipePrice : item.price} <span
                                         className="text-muted">{item.onRecipe ? "Recipe Price" : "Regular Price"}</span></strong>
                                     </h6>
+
                                     {item.recipe && <div><label>On Recipe </label><input type="checkbox"
                                                                                          onChange={handleChange(item.id, 'onRecipe', "checked")}
                                                                                          value={item.onRecipe}/>
@@ -123,11 +129,11 @@ function CartPage(props) {
                                 <div className="col-2 col-sm-2 col-md-2">
                                     <button type="button" className="btn btn-outline-danger btn-xs"
                                             onClick={() => removeFromList(item.id)}>
-                                        {/*<i className="fa fa-trash" aria-hidden="true"></i>*/}
+
                                         <FontAwesomeIcon icon={faTrash}/>
+
                                     </button>
                                 </div>
-
 
                                 <hr/>
                             </div>
@@ -139,14 +145,17 @@ function CartPage(props) {
 
 
             </div>
+
             <div className="card-footer">
                 <div className=" float-right">
                     <div className="d-inline-block mr-lg-4">
                         Total price: <b>{totalPrice}€</b>
                     </div>
+
                     <button onClick={BuyItems} className="btn btn-success text-light ">
                         Reserve Now
                     </button>
+
                 </div>
             </div>
         </div>

@@ -26,11 +26,6 @@ function ItemCard(props) {
 
     };
 
-    // if (showmore ==  true){
-    //     limit = props.item.description.length;
-    // } else
-    //     limit = 5;
-    //
     const limit = showMore ? props.item.description.length : 50;
     const handleReadMore = () => setShowMore(!showMore);
 
@@ -40,7 +35,7 @@ function ItemCard(props) {
         <div className="card">
             {!<img src={props.item.imageUrl}
                    className="card-img-top mt-3" alt="text "/> ? null :
-                <img className="card-img-top w-60 h-40" src={image1} alt="drug"/>}
+                <img className="card-img-top w-30 h-20" src={image1} alt="drug"/>}
 
             <div className="card-body">
 
@@ -48,11 +43,11 @@ function ItemCard(props) {
                 {
                     !showMore ?
                         (props.item.description.length > limit ? <div> {props.item.description.substring(0, limit)}
-                            <button onClick={handleReadMore} className="btn btn-link">Read More</button>
+                            <small>...</small><small onClick={handleReadMore} className="btn-link" > Read More</small>
                         </div> : props.item.description) :
                         (props.item.description.length > limit ? props.item.description.substring(0, limit) :
                             <div> {props.item.description}
-                                <button className="btn btn-link" onClick={handleReadMore}> Read Less</button>
+                                <small className="btn-link"  onClick={handleReadMore}>  Read Less</small>
                             </div>)
                 }
 
